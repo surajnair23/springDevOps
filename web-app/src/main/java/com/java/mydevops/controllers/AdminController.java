@@ -30,6 +30,10 @@ import com.java.mydevops.mongo.GetGender;
 import com.java.mydevops.mongo.GetMostRated;
 import com.java.mydevops.mongo.GetTopRated;
 import com.java.mydevops.mongo.input;
+import com.java.mydevops.mongoEntity.Age;
+import com.java.mydevops.mongoEntity.Count;
+import com.java.mydevops.mongoEntity.Gender;
+import com.java.mydevops.mongoEntity.Top;
 import com.java.mydevops.repository.AdminRepository;
 import com.java.mydevops.repository.FeedbackRepository;
 import com.java.mydevops.repository.PlaylistRepository;
@@ -84,16 +88,8 @@ public class AdminController {
     }
 
     @GetMapping("/topMongo")
-    public List<String> top() throws UnknownHostException {
-        Map<Long,Double> map = GetTopRated.run(getCorrectUri(uris.split("/")[2]));
-        List<String> list = new ArrayList<>();
-        for(long l : map.keySet()){
-            Song song = songRepository.findId(l);
-            String song_name=song.getSong_name();
-            String song_artist=song.getSong_artist();
-            list.add(song_name+"|||"+song_artist+"|||"+map.get(l));
-        }
-        return list;     
+    public List<Top> top() throws UnknownHostException {
+        return GetTopRated.run(getCorrectUri(uris.split("/")[2]));
     }
     
     @GetMapping("/delPlaylist")
@@ -151,30 +147,21 @@ public class AdminController {
     }
     
     @GetMapping("/genderMongo")
-    public Map<String, Double> gender() throws UnknownHostException {
+    public List<Gender> gender() throws UnknownHostException {
             System.out.println("test for admin app");
         return GetGender.run(getCorrectUri(uris.split("/")[2]));
     }
 
     @GetMapping("/ageMongo")
-    public Map<String, Double> age() throws UnknownHostException {
+    public List<Age> age() throws UnknownHostException {
 //    	System.out.println(val);
     	//System.out.println(env.getProperty("spring.data.mongodb.uri"));
         return GetAge.run(getCorrectUri(uris.split("/")[2]));
     }
 
     @GetMapping("/countMongo")
-    public List<String> count() throws UnknownHostException {
-        Map<Long, Double> map = GetMostRated.run(getCorrectUri(uris.split("/")[2]));
-        
-        List<String> list = new ArrayList<>();
-        for(long l : map.keySet()){
-            Song song = songRepository.findId(l);
-            String song_name=song.getSong_name();
-            String song_artist=song.getSong_artist();
-            list.add(song_name+"|||"+song_artist+"|||"+map.get(l));
-        }
-        return list;
+    public List<Count> count() throws UnknownHostException {
+        return GetMostRated.run(getCorrectUri(uris.split("/")[2]));
     }
     
     @PostMapping("/sendEmail")

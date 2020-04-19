@@ -3,7 +3,6 @@ package com.java.mydevops.mongo;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
-
 import com.java.mydevops.entity.Rating;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -11,11 +10,17 @@ import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
+
 
 
 public class input {
-    public static void postRating(List<Rating> ratings,String val) throws UnknownHostException {
-    ServerAddress a=new ServerAddress(InetAddress.getByName(val), 27017);
+
+
+    public static void postRating(List<Rating> ratings, String val) throws UnknownHostException {
+        ServerAddress a = new ServerAddress(InetAddress.getByName(val), 27017);
     MongoClient mongo = new MongoClient(a);
     DB database;
     database=mongo.getDB("ratings");
