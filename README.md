@@ -8,4 +8,5 @@ Make sure Maven install - skip tests is On
 Run maven install
 Head into target folder and run the following commands:
 ``docker build -f Dockerfile -t <dockerhub/repo> .
+
 ``docker push <dockerhub/repo>
