@@ -15,7 +15,7 @@ public SendEmail() {}
 		try {
 		email.setHostName("smtp.gmail.com");
 		email.setSmtpPort(587);
-		email.setAuthenticator(new DefaultAuthenticator("webfantasyipl@gmail.com", "webtoolstest"));
+		email.setAuthenticator(new DefaultAuthenticator("email@email.com", "password"));
 		email.setSSLOnConnect(false);
 		email.setStartTLSEnabled(true);
 		//From:
